@@ -1,0 +1,11 @@
+---
+# tasks file for vim
+- name: Install vim
+  ansible.builtin.package:
+    name: vim
+    state: present
+
+- name: Copy vimrc.local file
+  ansible.builtin.copy:
+    src: "{{ role_path }}/files/etc/vim/vimrc.local"
+    dest: /etc/vim/vimrc.local
