@@ -9,3 +9,4 @@
   ansible.builtin.copy:
     src: "{{ role_path }}/files/etc/vim/vimrc.local"
     dest: /etc/vim/vimrc.local
+    mode: '644'
