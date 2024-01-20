@@ -1,14 +1,19 @@
 ---
 # tasks file for vim
 - name: Install vim
-  become: yes
+  become: true
   ansible.builtin.package:
     name: vim
     state: present
 
+- name: Path for RHEL-like OS's
+  when: ansible_os_family == "RedHat"
+  ansible.builtin.set_fact:
+    vimrc_path: /etc/vimrc.local
+
 - name: Copy vimrc.local file
-  become: yes
+  become: true
   ansible.builtin.copy:
     src: "{{ role_path }}/files/etc/vim/vimrc.local"
-    dest: /etc/vim/vimrc.local
+    dest: "{{ vimrc_path | default('/etc/vim/vimrc.local') }}"
     mode: '644'
